@@ -101,6 +101,14 @@ pub fn multi_noise(parameters: &climate::ParameterList, sampler: &sampler::Sampl
 }
 
 #[wasm_bindgen]
+pub fn climate_noise(sampler: &sampler::Sampler, x_from: f64, x_to: f64, x_step: f64, y_from: f64, y_to: f64, y_step: f64, z_from: f64, z_to: f64, z_step: f64) -> Vec<f64> {
+  iterate_grid(|x, y, z| {
+    sampler.target(x as i64, y as i64, z as i64).vec()
+  }, x_from, x_to, x_step, y_from, y_to, y_step, z_from, z_to, z_step)
+    .into_iter().flatten().collect::<Vec<_>>()
+}
+
+#[wasm_bindgen]
 pub struct Test {
   x: i32,
   y: f64,

@@ -1,6 +1,6 @@
 [package]
 name = "deepslate-rs"
-version = "0.1.2"
+version = "0.1.6"
 edition = "2018"
 
 [lib]

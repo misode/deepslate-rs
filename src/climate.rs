@@ -19,6 +19,10 @@ fn quantize(x: f64) -> i64 {
 	(x * QUANTIZE_SCALE) as i64
 }
 
+fn unquantize(x: i64) -> f64 {
+	x as f64 / QUANTIZE_SCALE
+}
+
 #[derive(Clone, Copy)]
 pub struct Param {
 	min: i64,
@@ -104,6 +108,10 @@ impl TargetPoint {
 
 	fn space(&self) -> TargetSpace {
 		[self.temperature, self.humidity, self.continentalness, self.erosion, self.weirdness, self.depth, 0]
+	}
+
+	pub fn vec(&self) -> Vec<f64> {
+		Vec::from(self.space().map(unquantize))
 	}
 }
 
